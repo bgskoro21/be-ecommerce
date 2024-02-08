@@ -13,7 +13,7 @@ class UserResource extends JsonResource
             'id' => $this->id,
             'email' => $this->email,
             'name' => $this->name,
-            'profile_picture' => $this->whenNotNull($this->profile_picture)
+            'profile_picture' => $this->profile_picture != null ? asset('storage/images/'.$this->profile_picture) : null
         ];
     }
 }

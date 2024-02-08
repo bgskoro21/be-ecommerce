@@ -14,11 +14,14 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::post('/users', [UserController::class, 'register']);
+Route::post('/register', [UserController::class, 'register']);
 Route::post('/login', [UserController::class, 'login']);
 
 Route::middleware('auth.jwt')->group(function () {
     Route::post("/logout", [UserController::class, 'logout']);
     Route::get("/me", [UserController::class, 'me']);
     Route::get("/refresh", [UserController::class, 'refresh']);
+    Route::get("/users", [UserController::class, 'search']);
+    Route::post("/users/{id}", [UserController::class, 'updateUser']); 
+    Route::delete("/users/{id}", [UserController::class, 'delete']);
 });

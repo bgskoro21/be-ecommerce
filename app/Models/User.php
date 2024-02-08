@@ -21,6 +21,17 @@ class User extends Authenticatable implements MustVerifyEmail, JWTSubject
 
     protected $guarded = ['id'];
 
+    public function scopeFilter($query, array $filters)
+    {
+        $query->when($filters['name'] ?? false, function($query, $name){
+            return $query->where('name', 'ilike', '%'.$name.'%');
+        });
+
+        $query->when($filters['email'] ?? false, function($query, $email){
+            return $query->where('email', 'ilike','%'.$email.'%');
+        });
+    }
+
     public function getJWTIdentifier()
     {
         return $this->getKey();

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\ManageFileStorage;
 use App\Http\Requests\UserLoginRequest;
 use App\Http\Requests\UserRegisterRequest;
 use App\Http\Requests\UserUpdateRequest;
@@ -75,14 +76,6 @@ class UserController extends Controller
         return new UserCollection($users);
     }
 
-    private function deleteImageFromStorage($profilePicture)
-    {
-        if($profilePicture != null)
-        {
-            Storage::delete('public/images/'.$profilePicture);
-        }
-    }
-
     public function delete(int $id): MessageResource
     {
         $user = User::find($id);
@@ -98,7 +91,7 @@ class UserController extends Controller
                     ])->setStatusCode(404));
         }
 
-        $this->deleteImageFromStorage($user->profile_picture);
+        ManageFileStorage::delete('public/images/'.$user->profile_picture);
         $user->delete();
         return new MessageResource("Successfully deleted user!");
     }
@@ -123,7 +116,7 @@ class UserController extends Controller
         $imageName = null;
         if($file)
         {
-            $this->deleteImageFromStorage($user->profile_picture);
+            ManageFileStorage::delete('public/images/'.$user->profile_picture);
             $imageName = time().'_'.str_replace(" ", "_", $data['name']).'.'.$file->getClientOriginalExtension();
             Storage::disk('local')->put('public/images/'.$imageName, file_get_contents($file));
         }

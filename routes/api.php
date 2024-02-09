@@ -38,4 +38,7 @@ Route::middleware('auth.jwt')->group(function () {
     // Route Product
     Route::post("/products", [ProductController::class, 'create']);
     Route::get("/products", [ProductController::class, 'search']);
+    Route::get("/products/{id}", [ProductController::class, 'get']);
+    Route::post("/products/{id}", [ProductController::class, 'update']);
+    Route::delete("/products/{id}", [ProductController::class, 'delete']);
 });

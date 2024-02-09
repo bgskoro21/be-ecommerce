@@ -28,6 +28,6 @@ class CreateProductRequest extends FormRequest
     {
         throw new HttpResponseException(response([
             'errors' => $validator->getMessageBag()
-        ]), 400);
+        ], 400));
     }
 }

@@ -41,5 +41,11 @@ class Product extends Model
         $query->when($filters['price'] ?? false, function($query, $price){
             $query->where('price','=', $price);
         });
+
+        $query->when($filters['sizeItem'] ?? false, function($query, $size){
+            return $query->whereHas('product_variants', function($query) use ($size){
+                $query->where('size', $size);
+            });
+        });
     }
 }

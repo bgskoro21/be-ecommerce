@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\ProductVariantController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -41,4 +42,10 @@ Route::middleware('auth.jwt')->group(function () {
     Route::get("/products/{id}", [ProductController::class, 'get']);
     Route::post("/products/{id}", [ProductController::class, 'update']);
     Route::delete("/products/{id}", [ProductController::class, 'delete']);
+
+    // Route Product Variant
+    Route::post("/products/{productId}/product-variants", [ProductVariantController::class, 'create']);
+    Route::get("/products/{productId}/product-variants/{id}", [ProductVariantController::class, 'get']);
+    Route::put("/products/{productId}/product-variants/{id}", [ProductVariantController::class, 'update']);
+    Route::delete("/products/{productId}/product-variants/{id}", [ProductVariantController::class, 'delete']);
 });

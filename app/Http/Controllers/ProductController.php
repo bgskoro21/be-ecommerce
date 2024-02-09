@@ -65,7 +65,7 @@ class ProductController extends Controller
         $page = $request->input("page", 1);
         $size = $request->input("size", 10);
 
-        $products = Product::latest()->filter(request(['name','description','price']))->paginate(perPage: $size, page: $page)->withQueryString();
+        $products = Product::latest()->filter(request(['name','description','price', 'sizeItem']))->paginate(perPage: $size, page: $page)->withQueryString();
 
         return new ProductCollection($products);
     }

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\ProductController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -33,4 +34,8 @@ Route::middleware('auth.jwt')->group(function () {
     Route::get("/categories/{id}", [CategoryController::class, 'get']);
     Route::put("/categories/{id}", [CategoryController::class, 'update']);
     Route::delete("/categories/{id}", [CategoryController::class, 'delete']);
+
+    // Route Product
+    Route::post("/products", [ProductController::class, 'create']);
+    Route::get("/products", [ProductController::class, 'search']);
 });

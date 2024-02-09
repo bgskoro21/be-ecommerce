@@ -124,7 +124,7 @@ class UserController extends Controller
         if($file)
         {
             $this->deleteImageFromStorage($user->profile_picture);
-            $imageName = time().'_'.$data['name'].'.'.$file->getClientOriginalExtension();
+            $imageName = time().'_'.str_replace(" ", "_", $data['name']).'.'.$file->getClientOriginalExtension();
             Storage::disk('local')->put('public/images/'.$imageName, file_get_contents($file));
         }
 

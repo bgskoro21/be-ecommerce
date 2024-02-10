@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\ProductGalleryController;
 use App\Http\Controllers\ProductVariantController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
@@ -48,4 +49,8 @@ Route::middleware('auth.jwt')->group(function () {
     Route::get("/products/{productId}/product-variants/{id}", [ProductVariantController::class, 'get']);
     Route::put("/products/{productId}/product-variants/{id}", [ProductVariantController::class, 'update']);
     Route::delete("/products/{productId}/product-variants/{id}", [ProductVariantController::class, 'delete']);
+
+    // Route Product Gallery
+    Route::post("/products/{productId}/product-galleries", [ProductGalleryController::class, 'create']);
+    Route::delete("/products/{productId}/product-galleries/{id}", [ProductGalleryController::class, 'delete']);
 });

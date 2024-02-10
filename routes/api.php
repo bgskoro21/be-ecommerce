@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CartController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProductGalleryController;
@@ -53,4 +54,12 @@ Route::middleware(['auth.jwt', 'auth.admin'])->group(function () {
     // Route Product Gallery
     Route::post("/products/{productId}/product-galleries", [ProductGalleryController::class, 'create']);
     Route::delete("/products/{productId}/product-galleries/{id}", [ProductGalleryController::class, 'delete']);
+});
+
+Route::middleware('auth.jwt')->group(function () {
+    // Route Cart
+    Route::post("/cart", [CartController::class, 'create']);
+    Route::get("/cart", [CartController::class, 'search']);
+    Route::patch("/cart/{id}", [CartController::class, 'update']);
+    Route::delete("/cart/{id}", [CartController::class, 'delete']);
 });

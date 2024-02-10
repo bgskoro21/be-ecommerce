@@ -10,13 +10,14 @@ class ProductResource extends JsonResource
     public function toArray(Request $request): array
     {
         return [
+            "product_id" => $this->id,
             "name" => $this->name,
             "description" => $this->description,
             "price" => $this->price,
             "category_id" => $this->category_id,
             "image_path" => asset("storage/products/".$this->image_path),
-            "product_galleries" => ProductGalleryResource::collection($this->product_galleries),
-            "product_variants" => $this->product_variants
+            "product_galleries" => ProductGalleryResource::collection($this->whenLoaded('product_galleries')),
+            "product_variants" => ProductVariantResource::collection($this->whenLoaded('product_variants'))
         ];
     }
 }

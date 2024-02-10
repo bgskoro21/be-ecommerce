@@ -23,6 +23,7 @@ class DatabaseSeeder extends Seeder
             'email' => 'bagaskara148@gmail.com',
             'email_verified_at' => Carbon::now(),
             'password' => Hash::make('bagas123'),
+            'isAdmin' => true
         ]);
 
         Category::create([

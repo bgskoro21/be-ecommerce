@@ -18,7 +18,8 @@ class UserRegisterRequest extends FormRequest
         return [
             'email' => ['required', 'email:dns', 'unique:users', 'max:255'],
             'password' => ['required', 'max:100'],
-            'name' => ['required', 'max:100']
+            'name' => ['required', 'max:100'],
+            'isAdmin' => ['required','boolean']
         ];
     }
 

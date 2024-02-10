@@ -26,6 +26,14 @@ class DatabaseSeeder extends Seeder
             'isAdmin' => true
         ]);
 
+        \App\Models\User::create([
+            'name' => 'Bagaskara',
+            'email' => 'bagaskara_dwi_putra@teknokrat.ac.id',
+            'email_verified_at' => Carbon::now(),
+            'password' => Hash::make('bagas123'),
+            'isAdmin' => false
+        ]);
+
         Category::create([
             "name" => "SEASON I",
             "description" => "Bagus banget ini!"

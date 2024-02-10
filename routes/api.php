@@ -21,7 +21,7 @@ use Illuminate\Support\Facades\Route;
 Route::post('/register', [UserController::class, 'register']);
 Route::post('/login', [UserController::class, 'login']);
 
-Route::middleware('auth.jwt')->group(function () {
+Route::middleware(['auth.jwt', 'auth.admin'])->group(function () {
     // Route User
     Route::post("/logout", [UserController::class, 'logout']);
     Route::get("/me", [UserController::class, 'me']);

@@ -26,7 +26,6 @@ class UserController extends Controller
 
         $user = new User($data);
         $user->password = Hash::make($data['password']);
-        $user->isAdmin = true;
         $user->save();
 
         return (new UserResource($user))->response()->setStatusCode(201);

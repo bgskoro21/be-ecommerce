@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProductGalleryController;
 use App\Http\Controllers\ProductVariantController;
@@ -62,4 +63,7 @@ Route::middleware('auth.jwt')->group(function () {
     Route::get("/cart", [CartController::class, 'search']);
     Route::patch("/cart/{id}", [CartController::class, 'update']);
     Route::delete("/cart/{id}", [CartController::class, 'delete']);
+
+    // Route Order
+    Route::post("/order", [OrderController::class, 'create']);
 });

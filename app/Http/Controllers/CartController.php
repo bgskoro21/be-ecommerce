@@ -88,7 +88,20 @@ class CartController extends Controller
                     ], 404));
         }
 
-        $cart->cart_items->where("id", $id)->first()->update($data);
+        $cartItem = $cart->cart_items->where("id", $id)->first();
+
+        if(!$cartItem)
+        {
+            throw new HttpResponseException(response([
+                "errors" => [
+                    "message" => [
+                        "Cart item not found!"
+                    ]
+                ]
+                    ], 404));
+        }
+
+        $cartItem->update($data);
 
         return new CartResource($cart);
     }
@@ -109,7 +122,20 @@ class CartController extends Controller
                     ], 404));
         }
 
-        $cart->cart_items->where("id", $id)->first()->delete();
+        $cartItem = $cart->cart_items->where("id", $id)->first();
+
+        if(!$cartItem)
+        {
+            throw new HttpResponseException(response([
+                "errors" => [
+                    "message" => [
+                        "Cart item not found!"
+                    ]
+                ]
+                    ], 404));
+        }
+
+        $cartItem->delete();
 
         return new MessageResource("Successfully deleted cart item");
     }
